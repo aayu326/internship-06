@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechConnect Club - Bridging Innovation & Community</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --text-dark: #ff006a;
+            --bg-light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>');
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .navbar {
+            background: rgba(134, 98, 127, 0.95) !important;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary-color) !important;
+            font-size: 1.5rem;
+        }
+
+        .nav-link {
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.2s both;
+        }
+
+        .btn-hero {
+            background: linear-gradient(45deg, var(--accent-color), #ff6b6b);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: slideInUp 1s ease-out 0.4s both;
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 1.5rem;
+        }
+
+        .member-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .carousel-control-prev,
+        .carousel-control-next {
+            width: 50px;
+            height: 50px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .carousel-control-prev {
+            left: -25px;
+        }
+
+        .carousel-control-next {
+            right: -25px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .event-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .event-date {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-control {
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 0 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="fas fa-code"></i> TechConnect
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#events">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#members">Members</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#gallery">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="hero-title">TechConnect Club</h1>
+                        <p class="hero-subtitle">Bridging Innovation, Technology, and Community</p>
+                        <p class="mb-4">Join us in exploring the latest in technology, building amazing projects, and connecting with like-minded individuals who share your passion for innovation.</p>
+                        <button class="btn btn-hero btn-lg" onclick="scrollToSection('about')">
+                            Discover More <i class="fas fa-arrow-down ms-2"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <i class="fas fa-laptop-code" style="font-size: 15rem; opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-5" style="background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-title">About TechConnect</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">
+                                <i class="fas fa-bullseye text-primary me-2"></i>
+                                Our Mission
+                            </h4>
+                            <p class="card-text">To create a vibrant community of tech enthusiasts, fostering innovation, collaboration, and continuous learning in the ever-evolving world of technology.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <h4 class="card-title">
+                                <i class="fas fa-eye text-primary me-2"></i>
+                                Our Vision
+                            </h4>
+                            <p class="card-text">To be the premier technology club that bridges the gap between academic learning and real-world application, preparing students for successful careers in tech.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-lg-4 mb-3">
+                    <div class="text-center">
+                        <i class="fas fa-users text-primary" style="font-size: 3rem;"></i>
+                        <h4 class="mt-3">Community</h4>
+                        <p>Building lasting connections</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="text-center">
+                        <i class="fas fa-lightbulb text-primary" style="font-size: 3rem;"></i>
+                        <h4 class="mt-3">Innovation</h4>
+                        <p>Pushing technological boundaries</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-3">
+                    <div class="text-center">
+                        <i class="fas fa-graduation-cap text-primary" style="font-size: 3rem;"></i>
+                        <h4 class="mt-3">Learning</h4>
+                        <p>Continuous skill development</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Events Section -->
+    <section id="events" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Upcoming Events</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="event-card">
+                        <div class="event-date">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            July 15, 2025
+                        </div>
+                        <h4>AI Workshop Series</h4>
+                        <p>Join us for a comprehensive workshop on Machine Learning fundamentals and practical applications. Perfect for beginners and intermediate learners.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-clock me-1"></i> 2:00 PM - 5:00 PM</span>
+                            <span><i class="fas fa-map-marker-alt me-1"></i> Room 204</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="event-card">
+                        <div class="event-date">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            July 22, 2025
+                        </div>
+                        <h4>Hackathon 2025</h4>
+                        <p>24-hour coding challenge where teams compete to build innovative solutions. Prizes, mentorship, and networking opportunities await!</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-clock me-1"></i> 6:00 PM - 6:00 PM</span>
+                            <span><i class="fas fa-map-marker-alt me-1"></i> Main Auditorium</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="event-card">
+                        <div class="event-date">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            August 5, 2025
+                        </div>
+                        <h4>Tech Talk: Future of Web Development</h4>
+                        <p>Industry expert Sarah Chen will discuss emerging trends in web development, including WebAssembly, serverless architecture, and modern frameworks.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-clock me-1"></i> 3:00 PM - 4:30 PM</span>
+                            <span><i class="fas fa-map-marker-alt me-1"></i> Lecture Hall A</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="event-card">
+                        <div class="event-date">
+                            <i class="fas fa-calendar-alt me-2"></i>
+                            August 12, 2025
+                        </div>
+                        <h4>Open Source Contribution Day</h4>
+                        <p>Learn how to contribute to open source projects. We'll guide you through your first contribution and help you become part of the global developer community.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span><i class="fas fa-clock me-1"></i> 1:00 PM - 6:00 PM</span>
+                            <span><i class="fas fa-map-marker-alt me-1"></i> Computer Lab</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Members Section -->
+    <section id="members" class="py-5" style="background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-title">Our Team</h2>
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card member-card">
+                        <div class="member-avatar">AM</div>
+                        <h5>satyesh singh</h5>
+                        <p class="text-muted">President</p>
+                        <p>Computer Science Senior passionate about AI and machine learning. Leading our club towards innovative projects and community building.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card member-card">
+                        <div class="member-avatar">SJ</div>
+                        <h5>Sushant rout</h5>
+                        <p class="text-muted">Vice President</p>
+                        <p>Full-stack developer with expertise in React and Node.js. Organizes our technical workshops and coding bootcamps.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card member-card">
+                        <div class="member-avatar">as</div>
+                        <h5>arnim sharma</h5>
+                        <p class="text-muted">Technical Lead</p>
+                        <p>Backend specialist and cloud architecture enthusiast. Leads our technical projects and mentors junior developers.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="card member-card">
+                        <div class="member-avatar">EP</div>
+                        <h5>ashish raj</h5>
+                        <p class="text-muted">Events Coordinator</p>
+                        <p>Marketing major with a passion for tech. Manages our events, social media presence, and community outreach programs.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Gallery</h2>
+            <div id="galleryCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-lg-4 mb-3">
+                                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-fluid" alt="Team collaboration">
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-fluid" alt="Coding workshop">
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-fluid" alt="Tech presentation">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-lg-4 mb-3">
+                                <img src="https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-fluid" alt="Hackathon event">
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-fluid" alt="Team meeting">
+                            </div>
+                            <div class="col-lg-4 mb-3">
+                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" class="img-fluid" alt="Project showcase">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#galleryCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#galleryCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5" style="background: var(--bg-light);">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="contact-form">
+                        <h4 class="mb-4">Send us a message</h4>
+                        <form id="contactForm">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-submit btn-primary">
+                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="contact-info">
+                        <h4 class="mb-4">Contact Information</h4>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-map-marker-alt text-primary me-2"></i>Location</h5>
+                            <p>D-block <br>
+                            tula's institute<br>
+                            dehradun, uttrakkhand</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-envelope text-primary me-2"></i>Email</h5>
+                            <p>info@techconnectclub.edu<br>
+                            president@techconnectclub.edu</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-phone text-primary me-2"></i>Phone</h5>
+                            <p>+91 7209558552</p>
+                        </div>
+                        <div class="mb-4">
+                            <h5><i class="fas fa-clock text-primary me-2"></i>Office Hours</h5>
+                            <p>Monday - Friday: 2:00 PM - 6:00 PM<br>
+                            Saturday: 10:00 AM - 2:00 PM</p>
+                        </div>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h5>TechConnect Club</h5>
+                    <p>Bridging innovation, technology, and community through collaborative learning and hands-on projects.</p>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#about" class="text-light">About Us</a></li>
+                        <li><a href="#events" class="text-light">Events</a></li>
+                        <li><a href="#members" class="text-light">Members</a></li>
+                        <li><a href="#gallery" class="text-light">Gallery</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 mb-4">
+                    <h5>Stay Connected</h5>
+                    <p>Follow us on social media for the latest updates and announcements.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2025 TechConnect Club. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="mb-0">designed by <i class="fas fa-heart text-danger"></i>Aayu326 </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Smooth scrolling for navigation links
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            const navHeight = document.querySelector('.navbar').offsetHeight;
+            const elementPosition = element.offsetTop - navHeight;
+            
+            window.scrollTo({
+                top: elementPosition,
+                behavior: 'smooth'
+            });
+        }
+
+        // Add click event listeners to navigation links
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    scrollToSection(targetId);
+                });
+            });
+
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                // Simple validation
+                if (name && email && subject && message) {
+                    // Simulate form submission
+                    alert('Thank you for your message! We\'ll get back to you soon.');
+                    contactForm.reset();
+                } else {
+                    alert('Please fill in all fields.');
+                }
+            });
+
+            // Navbar background on scroll
+            window.addEventListener('scroll', function() {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                } else {
+                    navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                }
+            });
+
+            // Animate elements on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe cards and other elements
+            const animatedElements = document.querySelectorAll('.card, .event-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+
+            // Auto-advance carousel
+            const carousel = new bootstrap.Carousel('#galleryCarousel', {
+                interval: 5000,
+                wrap: true
+            });
+
+            // Add hover effect to member cards
+            const memberCards = document.querySelectorAll('.member-card');
+            memberCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-10px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Add active class to current navigation item
+            window.addEventListener('scroll', function() {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // Add typing effect to hero subtitle
+            const subtitle = document.querySelector('.hero-subtitle');
+            const originalText = subtitle.textContent;
+            subtitle.textContent = '';
+            
+            let i = 0;
+            const typeWriter = function() {
+                if (i < originalText.length) {
+                    subtitle.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            };
+            
+            setTimeout(typeWriter, 1500);
+
+            // Add particle effect to hero section
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = '4px';
+                particle.style.height = '4px';
+                particle.style.background = 'white';
+                particle.style.borderRadius = '50%';
+                particle.style.opacity = '0.7';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = '100%';
+                particle.style.pointerEvents = 'none';
+                particle.style.animation = 'float-up 8s linear infinite';
+                
+                document.querySelector('.hero-section').appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 8000);
+            }
+
+            // Add CSS for particle animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes float-up {
+                    0% {
+                        transform: translateY(0) rotate(0deg);
+                        opacity: 0.7;
+                    }
+                    100% {
+                        transform: translateY(-100vh) rotate(360deg);
+                        opacity: 0;
+                    }
+                }
+                
+                .nav-link.active {
+                    color: var(--primary-color) !important;
+                }
+                
+                .nav-link.active::after {
+                    width: 100%;
+                    left: 0;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Create particles periodically
+            setInterval(createParticle, 300);
+        });
+
+        // Add click handlers for social links (for demo purposes)
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.social-links a')) {
+                e.preventDefault();
+                const platform = e.target.closest('a').querySelector('i').className;
+                alert(`This would open our ${platform.includes('facebook') ? 'Facebook' : 
+                       platform.includes('twitter') ? 'Twitter' : 
+                       platform.includes('instagram') ? 'Instagram' : 
+                       platform.includes('linkedin') ? 'LinkedIn' : 
+                       platform.includes('github') ? 'GitHub' : 'Discord'} page!`);
+            }
+        });
+    </script>
+</body>
+</html>
