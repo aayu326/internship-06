@@ -1,4 +1,4 @@
-# internship-06
+# TASK-06
 # 🎉 Club – Student Club Website
 
 **Aayu Club** is a dynamic and engaging website created for showcasing events, activities, and updates of a student club. Built using **HTML, CSS, and JavaScript**, it serves as a digital home for club members and the college community.
